@@ -1,10 +1,14 @@
 const EventEmitter = require('events');
 // class human object John 
-const emitter = new EventEmitter();
 // raise an event
+
+
+const Logger = require('./logger');
+const logger = new Logger();
+
 // register a listener 
-emitter.on('messageLogged', function(arg) {
+logger.on('messageLogged', (arg) => {
     console.log('Listener called', arg);
 });
-emitter.emit('messageLogged', { id: 1, url: 'http://'});
-// emit means making a noise or signalling 
+
+logger.log('message');
