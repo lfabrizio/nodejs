@@ -3,8 +3,8 @@ const EventEmitter = require('events');
 const emitter = new EventEmitter();
 // raise an event
 // register a listener 
-emitter.on('messageLogged', function() {
-    console.log('Listener called');
+emitter.on('messageLogged', function(arg) {
+    console.log('Listener called', arg);
 });
-emitter.emit('messageLogged');
+emitter.emit('messageLogged', { id: 1, url: 'http://'});
 // emit means making a noise or signalling 
