@@ -1,12 +1,5 @@
-const os = require('os');
+const fs = require('fs');
+// always use async
+const files = fs.readdirSync('./');
 
-var totalMemory = os.totalmem();
-var freeMemory = os.freemem();
-
-console.log('Total Memory:' + totalMemory);
-
-// template string 
-// es6 / es2
-
-console.log(`Total Memory: ${totalMemory}`)
-console.log(`Free Memory: ${freeMemory}`)
+console.log(files);
