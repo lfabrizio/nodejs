@@ -7,6 +7,8 @@ const logger = require('./logger');
 const express = require('express');
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', './views');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -39,7 +41,7 @@ const courses = [
     { id: 3, name: 'course3' },
 ];
 app.get('/', (req, res) => {
-res.send('Hello World!');
+res.render('index', { title: 'My Express App', message: 'Hello' });
 });
 
 app.get('/api/courses', (req, res) => {
