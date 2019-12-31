@@ -7,11 +7,12 @@ mongoose.connect('mongodb://localhost/playground')
 const courseSchema = new mongoose.Schema({
     name: String, 
     author: String,
-    tags: [ Strings ],
+    tags: [ String ],
     data: { type: Date, default: Date.now },
     isPublished: Boolean
 });
 
+async function createCourse () {
 const Course = mongoose.model('Course', courseSchema);
 const course = new Course({ 
     name: 'Node.js Course',
@@ -19,3 +20,9 @@ const course = new Course({
     tags: ['node', 'backend'],
     isPublished: true
 });
+
+const result = await course.save();
+console.log(result);
+}
+
+createCourse();
