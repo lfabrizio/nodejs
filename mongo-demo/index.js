@@ -32,12 +32,9 @@ async function getCourses() {
 
     const courses = await Course
  .find({ author: 'Mosh', isPublished: true })
- .find()
-     .or([ { author: 'Mosh'}, { isPublished: true } ])
-     .and([ ])
 .limit(10)
 .sort({ name: 1 })
-.select({ name: 1, tags: 1 });
+.count();
 console.log(courses);
 }
 getCourses();
