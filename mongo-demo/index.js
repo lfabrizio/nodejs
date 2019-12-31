@@ -28,13 +28,30 @@ console.log(result);
 createCourse();
 
 async function getCourses() {
-
+    const pageNumber = 2;
+    const pageSize = 10;
 
     const courses = await Course
  .find({ author: 'Mosh', isPublished: true })
-.limit(10)
+.skip((pageNumber -1) * pageSize)
+.limit(pageSize)
 .sort({ name: 1 })
-.count();
+.select({ name: 1, tags: 1 });
 console.log(courses);
 }
-getCourses();
+
+
+async function updateCourse(id) {
+const result = await Course.update({ __id: id }, {
+   $set: {
+       author: 'Mosh',
+       isPublished: false
+   } 
+});
+console.log(result)
+}
+async function removeCourse(id) {
+    const result = await Course.deleteOne({ _id: id});
+    console.log(result);
+}
+removeCourse('5e0b9119a71f7f383c326a19');
