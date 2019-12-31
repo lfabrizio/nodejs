@@ -20,8 +20,13 @@ const courseSchema = new mongoose.Schema({
     tags: {
         type: Array,
         validate: {
-            validator: function(v)  {
-                return v.length > 0;
+            isAsync: true,
+            validator: function(v, callback)  {
+                setTimeout(() => {
+                    const result =  v && v.length > 0;
+                    callback(result);
+                }, 4000);
+            
             },
             message: 'A course should have a tag'
         }
@@ -36,7 +41,7 @@ const Course = mongoose.model('Course', courseSchema);
 async function createCourse () {
 const course = new Course({ 
     name: 'Angular Course',
-    category: 'web',
+    category: '-',
     author: 'Mosh',
     tags: null,
     isPublished: true,
@@ -48,7 +53,8 @@ const result = await course.save();
 console.log(result);
 }
 catch (ex) {
-    console.log(ex.message);
+    for (field in ex.errors)
+    console.log(ex.errors[field].message)
 }
 }
 
